@@ -1,0 +1,160 @@
+{% extends 'forex/base.html'%}
+{% load static %}
+{% block content %}
+
+<style>
+  #customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+   td,  th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #customers tr:hover {background-color: #ddd;}
+  
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+  </style>
+<div class="container">
+  <br><br>
+  <div class="row">
+    <div class="col-md-5">
+      <br>
+      <!-- <img class="img-fluid" src="{{ forex.image_url }}" alt="" style = "width: 90%;"> -->
+      <br><br>
+
+      <h3 class="card-title text-center ">Date : {{ date }}</h3>
+      
+      <canvas id="chart" width="400" height="400"></canvas>
+
+      <script type="text/javascript">
+
+        const ctx = document.getElementById('chart').getContext('2d');
+        var rates = '{{rates}}';
+        var max = '{{max}}';
+        var date = '{{date}}';
+        var min = '{{min}}';
+
+        const myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['KWD', 'BHD', 'OMR', 'JOD', 'KYD', 'GIP', 'GBP', 'CHF', 'USD', 'EUR'],
+            datasets: [{
+              label: 'INR Against top 10 currencies',
+              data: [260, 212.64, 208.18, 112.87, 96.19, 94.64, 94.36, 81.21, 80.12, 79.82],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+
+      </script>
+<br><br><br>
+
+      <table>
+        <tr >
+          <th class="th">Country</th>
+          <th class="th">Currency</th>
+          <th class="th">Currency Value</th>
+        </tr>
+        <tr>
+          <td>Kuwait </td>
+          <td>KWD</td>
+          <td>260</td>
+        </tr>
+        <tr>
+          <td>Bahrain</td>
+          <td>BHD</td>
+          <td>212.64</td>
+        </tr>
+        <tr>
+          <td>Omar</td>
+          <td>OMR</td>
+          <td>208.18</td>
+        </tr>
+        <tr>
+          <td>Jordan</td>
+          <td>JOD</td>
+          <td>112.87</td>
+        </tr>
+        <tr>
+          <td>Cayman Islands</td>
+          <td>KYD</td>
+          <td>96.19</td>
+        </tr>
+        <tr>
+          <td>Gibraltar</td>
+          <td>GIP</td>
+          <td>94.64</td>
+        </tr>
+        <tr>
+          <td>Great Britain</td>
+          <td>GBP</td>
+          <td>94.36</td>
+        </tr>
+        <tr>
+          <td>Switzerland</td>
+          <td>CHF</td>
+          <td>81.21</td>
+        </tr>
+        <tr>
+          <td> United States of America</td>
+          <td>USD</td>
+          <td>80.12</td>
+        </tr>
+        <tr>
+          <td>Eurozone</td>
+          <td>EUR</td>
+          <td>79.82</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+  {% endblock %}

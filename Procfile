@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn exchange_rate.wsgi --log-file-
